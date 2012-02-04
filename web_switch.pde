@@ -23,15 +23,15 @@ uint16_t print_webpage(uint8_t *buf, byte on_off);
 int8_t analyse_cmd(char *str);
 
 // LED cathode connects the Pin4, anode to 5V through 1K resistor
-#define LED_PIN  8 // Some damn problem when i use 13, switched to 8 which works!
+#define RELAY_PIN  8 // Some damn problem when i use 13, switched to 8 which works!
 
 
 void setup(){
   
    /* Setup Serial */
    Serial.begin(9600);
-   pinMode(LED_PIN, OUTPUT); 
-   digitalWrite(LED_PIN, 0);  // switch on LED
+   pinMode(RELAY_PIN, OUTPUT); 
+   digitalWrite(RELAY_PIN, 0);  // switch on LED
    /*initialize enc28j60*/
 	 es.ES_enc28j60Init(mymac);
    es.ES_enc28j60clkout(2); // change clkout from 6.25MHz to 12.5MHz
@@ -131,12 +131,12 @@ void loop(){
        
         if (cmd==2 || cmd==5){
                 on_off=1;
-                digitalWrite(LED_PIN, HIGH);  // switch on LED
+                digitalWrite(RELAY_PIN, HIGH);  // switch on LED
                 Serial.println("Turning LED ON");
         }
         else if (cmd==3 || cmd==4 ){
                 on_off=0;
-        	digitalWrite(LED_PIN, LOW);  // switch off LED
+        	digitalWrite(RELAY_PIN, LOW);  // switch off LED
                 Serial.println("Turning LED OFF");
         } 
         
